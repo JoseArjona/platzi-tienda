@@ -1,6 +1,6 @@
 const linkEmail = document.querySelector('.navbar-email');
 const mobileMenu = document.querySelector('.mobile-menu');
-const productDetails = document.querySelector('.product-detail');
+const productDetails = document.querySelector('#shCartAside');
 const burguerIcon = document.querySelector('#burguerIcon');
 const accountMenu = document.querySelector('#accountMenu');
 const shoppingCart = document.querySelector('#shoppingCart');
