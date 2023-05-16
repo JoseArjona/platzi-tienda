@@ -1,9 +1,11 @@
 const linkEmail = document.querySelector('.navbar-email');
 const mobileMenu = document.querySelector('.mobile-menu');
-const productDetails = document.querySelector('#shCartAside');
+const shCartAside = document.querySelector('#shCartAside');
 const burguerIcon = document.querySelector('#burguerIcon');
 const accountMenu = document.querySelector('#accountMenu');
 const shoppingCart = document.querySelector('#shoppingCart');
+const detailsAside = document.querySelector('#detailsAside');
+const showAsideDetail = document.querySelector('#showAsideDetail');
 
 // Creamos una funcion para que se active y desactive el menu
 function toggleMenus(selectMenu) {
@@ -18,13 +20,15 @@ linkEmail.addEventListener('click', () => {
 burguerIcon.addEventListener('click', () => {
     console.log('click Burguer');
     toggleMenus(mobileMenu);
-    productDetails.classList.add('inactive');
+    shCartAside.classList.add('inactive');
+    detailsAside.classList.add('inactive');
 });
 
 shoppingCart.addEventListener('click', () => {
     console.log('click Cart');
-    toggleMenus(productDetails);
+    detailsAside.classList.add('inactive');
     mobileMenu.classList.add('inactive');
+    toggleMenus(shCartAside);
 });
 
 // Products List
@@ -41,14 +45,16 @@ products.push({
     id: 2,
     name: 'Car',
     price: 12000,
-    image: 'https://images.pexels.com/photos/1519192/pexels-photo-1519192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    image: 'https://images.pexels.com/photos/1519192/pexels-photo-1519192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
 });
 
 products.push({
     id: 3,
     name: 'Airplane',
     price: 110000,
-    image: 'https://images.pexels.com/photos/45230/aircraft-double-decker-airport-army-aviation-space-45230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    image: 'https://images.pexels.com/photos/45230/aircraft-double-decker-airport-army-aviation-space-45230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
 });
 
 function renderCard(array) {
@@ -57,7 +63,7 @@ function renderCard(array) {
         // Creamos una constante para agregar el html de cada producto
         const productCard =
             `<div class="product-card">
-        <img src="${product.image}" alt="${product.name}" />
+        <img src="${product.image}" alt="${product.name}" class="imgCard" />
         <div class="product-info">
           <div>
             <p>$${product.price}</p>
@@ -72,6 +78,23 @@ function renderCard(array) {
         // Agregamos el html de cada producto al contenedor de productos
         document.querySelector('.cards-container').innerHTML += productCard;
     }
+
+    const imgCard = document.querySelectorAll('.imgCard');
+    const closeDetail = document.querySelector('#closeDetail');
+    imgCard.forEach((img) => {
+        img.addEventListener('click', () => {
+            console.log('click img');
+            toggleMenus(detailsAside);
+            mobileMenu.classList.add('inactive');
+            closeDetail.addEventListener('click', () => {
+                detailsAside.classList.add('inactive');
+            });
+        });
+    });
 }
+
+
+
+
 
 renderCard(products);
